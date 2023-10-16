@@ -9,26 +9,26 @@
 
 \usetheme{Berlin}
 
-\title[Wavefunction Optimisation and Backflow in Quantum Monte Carlo Simulations]{Optimisation and Backflow:}
-\subtitle{A personal experience and an introduction to my research}
+\title[Optimisation and Backflow]{Wavefunction Optimisation and Backflow in Quantum Monte Carlo Simulations:}
+\subtitle{}
 \author[Clio Johnson]{Clio~Kennedy~Johnson}
 %\institute[FST]{Faculty of Science and Technology}
-\date[2022-12-09]{9th of December, 2022}
-\titlegraphic{
-    \includegraphics[scale=.014]{./images/pde-solving-silhouette.jpg}
+\date[2023-10-17]{17th of October, 2023}
+\titlegraphic{%
+    \includegraphics[scale=.29]{./images/heatmap2.png}
 }
 
 \begin{document}
 
 \begin{frame}
-    \titlepage
+    \titlepage%
 \end{frame}
 
 
 \begin{frame}
     \frametitle{Introduction \& Overview}
     \begin{itemize}
-        \item[\textbullet] Overview on quantum Monte Carlo (QMC) methods, particularly variational Monte Carlo (VMC).
+        \item[\textbullet] Introduction to quantum Monte Carlo (QMC) methods, particularly variational Monte Carlo (VMC).
         \item[\textbullet] A look at wavefunction types and optimisation
         \item[\textbullet] A brief exploration of backflow displacements
     \end{itemize}
@@ -45,7 +45,7 @@
         E = \int\dd{\vb{x}}\rho\pqty{\vb{x}}f\pqty{\vb{x}}
         \approx\sum_{n=1}^{\mathcal{N}}\frac{f\pqty{\vb{x}_n}}{\mathcal{N}}
     \end{equation}
-    \framebreak
+    \framebreak%
 
     \textbf{A simple Monte Carlo Example:}\medskip\newline
     Compute $\pi$ from evaluating a circular integral:
@@ -53,32 +53,30 @@
         \centering
         % Put a graphic of quarter circle MC integration here
         \animategraphics[controls,scale=0.25]{3}{./figs/pi_gif/pi_30K-}{0}{9}
-        \caption{
+        \caption{%
             By nicoguaro - Own work, CC BY 3.0,
             \url{https://commons.wikimedia.org/w/index.php?curid=14609430}
         }
     \end{figure}
-    \framebreak
-
-    \textbf{Some useful terminology:}\medskip\newline
-    \begin{itemize}
-        \item[\textbullet] \textbf{Configuration} - A vector representing the current state of the system, in 3D QMC this is a $3N_e$ dimensional vector.
-        \item[\textbullet] \textbf{}
-    \end{itemize}
+    \framebreak%
 
     \textbf{What are QMC methods?}\medskip\newline
     QMC methods aim to solve many-body Schr\"odinger equations iteratively. They are used to estimate ground state energies of these many-body systems as well as optimise wavefunctions.\medskip\newline
-    \framebreak
+    \begin{equation}
+        \hat{H}=\sum\limits_{i}^{N_e}\frac{\nabla_i^2}{2}+\sum\limits_{i}^{N_e}\sum\limits_{j\neq i}^{N_e}\frac{1}{\vqty{\va{r}_{ij}}}-\sum\limits_{i}^{N_e}\sum\limits_{a}^{N_I}\frac{Z_a}{\vqty{\va{r}_{ia}}}+\sum\limits_a^{N_I}\sum\limits_b^{N_I}V_{ab}
+    \end{equation}
+    \framebreak%
 
     \textbf{Types of QMC}\medskip\newline
     There are two QMC algorithms that are most commonly used:
     \begin{itemize}
         \item[\textbullet] \textbf{Variational quantum Monte Carlo (VMC)}\newline
-        Takes a trial wavefunction with electron positions, proposes a move in configuration space and then either accepts or rejects it according to the Metropolis method.\newline
-        Other free parameters in the wavefunction can be optimised throughout the simulation. The simulation produces a variational estimate of the ground state energy through a rolling mean of local energies calculated at each iteration. The accuracy of this energy is dependent on a number of factors, including how well optimised the wavefunction parameters are.\newline
-    \item[\textbullet] \textbf{Diffusion quantum Monte Carlo (DMC)}
+        Takes a trial wavefunction with electron positions, proposes a move in configuration space and then either accepts or rejects it according to the Metropolis-Hastings method.\newline
+%       Other free parameters in the wavefunction can be optimised throughout the simulation. The simulation produces a variational estimate of the ground state energy through a rolling mean of local energies calculated at each iteration. The accuracy of this energy is dependent on a number of factors, including how well optimised the wavefunction parameters are.\newline
+        \item[\textbullet] \textbf{Diffusion quantum Monte Carlo (DMC)}\newline
+        DMC solves an imaginary time Schr\"odinger equation. A large number of configurations are diffused throughout the simulation, and their density is used to recover the ground state wavefunction. Most DMC simulations are \textbf{Fixed Node} DMC
     \end{itemize}
-    \framebreak
+    \framebreak%
 
     \textbf{VMC Formulation}\medskip\newline
     Given a configuration of $N$ electrons denoted
@@ -292,7 +290,6 @@
 \end{frame}
 
 
-\section{References}
 \begin{frame}[allowframebreaks]
     \frametitle{Further Reading}
     \bibliographystyle{vancouver}
