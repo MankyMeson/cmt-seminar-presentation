@@ -166,7 +166,7 @@
     \end{equation}
     \framebreak%
 
-    Obviously there are electron correlation effects unnacounted for using a singular Slater Determinant. It could be possible to ``tailor'' a wavefunction to a particular system by using????.\medskip\newline
+    Obviously there are electron correlation effects unnacounted for using a singular Slater Determinant. It could be possible to ``tailor'' a wavefunction to a particular system by using a multideterminant wavefunction, as is commonly done with post-Hartree-Fock methods. This comes with its unique benefits and drawbacks but most notably results in a loss of generality.\medskip\newline
     The most well used technique in VMC, is to use a \textbf{Jastrow correlation factor} to recover a good chunk of the correlation energy.
     \framebreak%
 
@@ -272,44 +272,26 @@
             \psi_T\pqty{\vb{X}\pqty{\vb{R}}}
         }
     \end{equation}
-    Which we always want to be defined \textit{i.e.} $\psi_T$ must be twice
-    differentiable. We demand this is also the case for the Slater determinant
-    incorporating the backflow transformation.
-    \framebreak
+    Which we always want to be defined \textit{i.e.} $\psi_T$ must be twice differentiable. We demand this is also the case for the Slater determinant incorporating the backflow transformation.\framebreak%
 
-    Consider taking our configuration of $N$ electrons, and fixing the
-    coordinates of all but two of them. We now have a problem which can be
-    expressed in terms of a centre of mass and separation coordinate system:
+    Consider taking our configuration of $N$ electrons, and fixing the coordinates of all but two of them. We now have a problem which can be expressed in terms of a centre of mass and separation coordinate system:
     \begin{equation*}
         \pqty{\bar{\vb{r}}_{ij},\vb{r}_{ij}}
     \end{equation*}
-    Our question becomes: What constraints ought to apply to
-    $\vb{X}\pqty{\vb{R}}$ at the coalescence point such that the local energy,
-    $E_L$, doesn't diverge.
-    \framebreak
+    Our question becomes: What constraints ought to apply to $\vb{X}\pqty{\vb{R}}$ at the coalescence point such that the local energy, $E_L$, doesn't diverge.\framebreak%
 
-    Skipping over the worst parts of the derivation for now:\newline
-    Recalling the kinetic contribution to local energy, we want to consider
-    the limit as $r_{ij}$ goes to $0$:
-    \begin{equation}
-        \lim\limits_{r_{ij}\to 0}\frac{
-            \laplacian\psi_T\pqty{\vb{X}\pqty{\vb{r}_{ij}}}
-        }{
-            \psi_T\pqty{\vb{X}\pqty{\vb{r}_{ij}}}
-        }
-    \end{equation}
-    If the two electrons are indistinguishable (spin aligned), then the
-    denominator must equal zero in the limit.\medskip\newline
-    So to prevent problems at like-spin electron coalescence we demand
-    \begin{equation}
-        \lim\limits_{r_{ij}\to 0}\laplacian\psi_T\pqty{\vb{X}\pqty{\vb{R}}}=0
-    \end{equation}
-    \framebreak
+    Skipping over the derivation for brevity:\newline
+    We derive the following conditions on the three-body backflow parameters ($K_{lmn}$):
+    \begin{align}
+        \sum_{\substack{m,n\\m+n=\alpha}}K_{1mn,s}L_\omega-K_{0mn}C & =0\quad\quad\forall\alpha\in\qty{0,\ldots,2N_\omega} \nonumber \\
+        \sum_{\substack{l,n\\l+n=\alpha}}K_{l1n,s}L_\omega-K_{l0n}C & =0 \nonumber \\
+        \sum_{\substack{l,m\\l+m=\alpha}}K_{lm1,s}L_\omega-K_{lm0}C & =0.
+    \end{align}
+\end{frame}
 
-    This is what allows us to derive conditions on the $c_{lmn}$ variational
-    parameters. These are still in development, we've reached the limit of my
-    research so far.\medskip\newline
-    Here be dragons...
+\begin{frame}[allowframebreaks]
+    \frametitle{Analytic Derivatives}
+    Numerical derivatives are unreliable, so CASINO implements analytic derivatives of its wavefunctions. This has taken up a large portion of the amount of time I've spent on this project.
 \end{frame}
 
 
